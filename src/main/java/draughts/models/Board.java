@@ -53,11 +53,20 @@ class Board {
         List<Piece> pieces = new ArrayList<Piece>();
         for (int i = 0; i < this.getDimension(); i++) {
             for (int j = 0; j < this.getDimension(); j++) {
-                pieces.add(this.squares[i][j].getPiece());
+                Piece piece = checkPieceColor(color, this.squares[i][j]);
+                if (piece!=null) 
+                    pieces.add(piece);
             }
         }
 		return pieces;
-	}
+    }
+    
+    Piece checkPieceColor(Color color, Square square){
+        Piece piece = square.getPiece();
+        if (piece != null && piece.getColor()==color)
+            return piece;
+        return null;
+    }
     
     int getDimension() {
 		return Board.DIMENSION;
