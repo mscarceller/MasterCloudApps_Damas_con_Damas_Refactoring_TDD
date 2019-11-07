@@ -15,7 +15,7 @@ public class Logic {
 	private Map<StateValue, Controller> controllers;
 
 	public Logic() {
-        this.session = new Session();
+		this.session = new Session();
         this.controllers = new HashMap<StateValue, Controller>();
 		this.startController = new StartController(this.session);
 		this.playController = new PlayController(this.session);
@@ -27,7 +27,7 @@ public class Logic {
 	}
 
 	public Controller getController() {
-		return this.controllers.get(this.session.getValueState());
+		return this.controllers.get(this.session.state.getValueState());
     }
 
 }
