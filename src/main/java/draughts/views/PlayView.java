@@ -4,18 +4,18 @@ import draughts.controllers.PlayController;
 import draughts.models.Error;
 import draughts.models.Coordinate;
 
-public class CommandView extends SubView {
+public class PlayView extends SubView {
 
     private static final String[] COLORS = {"blancas", "negras"};
 
     private static final String MESSAGE = "Derrota!!! No puedes mover tus fichas!!!";
 
-    public CommandView(){
+    public PlayView(){
         super();
     }
 
     public void interact(PlayController playController) {
-        String color = CommandView.COLORS[playController.getColor().ordinal()];
+        String color = PlayView.COLORS[playController.getColor().ordinal()];
         Error error = null;
         GameView gameView = new GameView();
         do {
@@ -29,7 +29,7 @@ public class CommandView extends SubView {
             }
         } while (error != null); 
         if (playController.isBlocked()){
-            this.console.write(CommandView.MESSAGE);
+            this.console.write(PlayView.MESSAGE);
         }
     }
 
