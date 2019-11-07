@@ -49,4 +49,12 @@ public class PlayViewTest {
         verify(playController).move(new Coordinate(2,1), new Coordinate(3, 0));
     }
 
+    @Test()
+    public void testGivenPlayViewWhenMoveWithbadStringCoordinateError() {
+        when(playController.getColor()).thenReturn(Color.BLACK);
+        when(console.readString("Mueven las negras: ")).thenReturn("ertg").thenReturn("32.41");
+        playView.interact(playController);
+        verify(playController).move(new Coordinate(2,1), new Coordinate(3, 0));
+    }
+
 }

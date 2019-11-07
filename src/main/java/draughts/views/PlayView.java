@@ -36,7 +36,7 @@ public class PlayView extends SubView {
         do{
             error = null;
             String command = this.console.readString("Mueven las " + color + ": ");
-            if (command.matches("[0-9][0-9]+([.][0-9][0-9])?$")){
+            if (command.matches("([0-9]{2,2})+(?:[.][0-9]{2,2})$")){
                 coordinates[0] = new Coordinate(command.substring(0, 2));
                 coordinates[1] = new Coordinate(command.substring(3, 5));
                 if (!coordinates[0].isValid() || !coordinates[1].isValid()) {
