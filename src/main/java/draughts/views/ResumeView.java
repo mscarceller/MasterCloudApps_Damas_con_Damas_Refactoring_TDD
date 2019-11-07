@@ -5,8 +5,6 @@ import draughts.utils.YesNoDialog;
 
 public class ResumeView extends SubView {
 
-    private static final String MESSAGE = "¿Queréis jugar otra";
-    
     private YesNoDialog yesNoDialog;
 
     public ResumeView(){
@@ -15,7 +13,7 @@ public class ResumeView extends SubView {
     }
 
     public void interact(ResumeController resumeController) {
-        if (this.yesNoDialog.read(ResumeView.MESSAGE)){
+        if (this.yesNoDialog.read(MessageView.LOOSER.toString())){
             resumeController.reset();
         } else {
             resumeController.next();
