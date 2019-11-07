@@ -37,37 +37,47 @@ public class Game {
 	}
 
 	public Error move(Coordinate origin, Coordinate target) {
+
 		if (board.isEmpty(origin)) {
 			return Error.EMPTY_ORIGIN;
 		}
-		Color color = this.board.getColor(origin);
-		if (this.turn.getColor() != color) {
+
+		Piece piece = this.board.getPiece(origin);
+		if (this.turn.getColor() != piece.getColor()) {
 			return Error.OPPOSITE_PIECE;
 		}
-		if (!origin.isDiagonal(target)) {
+
+		if (!piece.isDiagonalMovement(origin,target)){
 			return Error.NOT_DIAGONAL;
 		}
-		Piece piece = this.board.getPiece(origin);
-		if (!piece.isAdvanced(origin, target)) {
+		
+		if (!piece.isAdvancedMovement(origin,target)){
 			return Error.NOT_ADVANCED;
 		}
-		if (origin.diagonalDistance(target) >= 3) {
+
+		if (piece.isBadDistanceMovement(origin,target)){
 			return Error.BAD_DISTANCE;
 		}
+
 		if (!this.board.isEmpty(target)) {
 			return Error.NOT_EMPTY_TARGET;
 		}
-		if (origin.diagonalDistance(target) == 2) {
-			Coordinate between = origin.betweenDiagonal(target);
+
+
+		if (piece.isEatingMovement(origin,target)){
+			Coordinate between = piece.getEatedPieceCoordinate(origin, target);
 			if (this.board.getPiece(between) == null) {
 				return Error.EATING_EMPTY;
 			}
 			this.board.remove(between);
 		}
+
 		this.board.move(origin, target);
 		this.turn.change();
 		return null;
 	}
+
+	
 
 	public Color getColor(Coordinate coordinate) {
 		return this.board.getColor(coordinate);
