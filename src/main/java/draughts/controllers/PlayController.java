@@ -14,11 +14,7 @@ public class PlayController extends Controller {
 	}
 
 	public Error move(Coordinate origin, Coordinate target){
-		Error error = this.game.move(origin, target);
-		if (this.game.isBlocked()){
-			this.state.next();
-		}
-		return error;
+		return this.game.move(origin, target);
     }
 
 	public Piece getPiece(Coordinate coordinate) {
@@ -27,6 +23,10 @@ public class PlayController extends Controller {
 
 	public Color getColor() {
 		return this.game.getColor();
+	}
+
+	public void gameOver(){
+		this.state.next();
 	}
 	
 	public boolean isBlocked() {

@@ -25,6 +25,7 @@ public class PlayView extends SubView {
         } while (error != null); 
         if (playController.isBlocked()){
             MessageView.LOOSER.writeln();
+            playController.gameOver();
         }
     }
 
