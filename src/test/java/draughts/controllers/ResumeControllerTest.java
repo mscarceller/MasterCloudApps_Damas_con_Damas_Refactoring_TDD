@@ -4,35 +4,38 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import draughts.models.Session;
+import draughts.models.Game;
+import draughts.models.State;
 import draughts.models.StateValue;
 
 public class ResumeControllerTest {
 
     @Test
     public void givenResumeControllerWhenResumeGameMoveToInitialStateRequiereCorrectThenNotError() {
-        Session session= new Session();
-        ResumeController resumeController = new ResumeController(session);
-        assertEquals(StateValue.INITIAL, session.state.getValueState());
+		State state = new State();
+        Game game = new Game(); 
+        ResumeController resumeController = new ResumeController(game, state);
+        assertEquals(StateValue.INITIAL, state.getValueState());
         resumeController.next();
-        assertEquals(StateValue.IN_GAME, session.state.getValueState());
+        assertEquals(StateValue.IN_GAME, state.getValueState());
         resumeController.next();
-        assertEquals(StateValue.FINAL, session.state.getValueState());
+        assertEquals(StateValue.FINAL, state.getValueState());
         resumeController.reset();
-        assertEquals(StateValue.INITIAL, session.state.getValueState());
+        assertEquals(StateValue.INITIAL, state.getValueState());
     }
 
     @Test(expected = AssertionError.class)
     public void givenResumeControllerWhenResumeGameMoveOutThenError() {
-        Session session= new Session();
-        ResumeController resumeController = new ResumeController(session);
-        assertEquals(StateValue.INITIAL, session.state.getValueState());
+		State state = new State();
+        Game game = new Game(); 
+        ResumeController resumeController = new ResumeController(game, state);
+        assertEquals(StateValue.INITIAL, state.getValueState());
         resumeController.next();
-        assertEquals(StateValue.IN_GAME, session.state.getValueState());
+        assertEquals(StateValue.IN_GAME, state.getValueState());
         resumeController.next();
-        assertEquals(StateValue.FINAL, session.state.getValueState());
+        assertEquals(StateValue.FINAL, state.getValueState());
         resumeController.next();
-        assertEquals(StateValue.EXIT, session.state.getValueState());
+        assertEquals(StateValue.EXIT, state.getValueState());
         resumeController.next();
     }
 }

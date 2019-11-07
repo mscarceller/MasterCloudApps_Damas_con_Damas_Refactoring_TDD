@@ -19,7 +19,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import draughts.controllers.StartController;
-import draughts.models.Session;
+import draughts.models.Game;
+import draughts.models.State;
 import draughts.utils.Console;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -41,7 +42,9 @@ public class GameViewTest {
     
     @Test
     public void testInteract(){
-        StartController startController = new StartController(new Session());
+		State state = new State();
+        Game game = new Game(); 
+        StartController startController = new StartController(game, state);
         this.gameView.write(startController);
         verify(console, times(90)).write(argument.capture());
         List<String> rows = Arrays.asList(

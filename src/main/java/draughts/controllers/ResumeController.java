@@ -1,12 +1,13 @@
 package draughts.controllers;
 
-import draughts.models.Session;
+import draughts.models.Game;
+import draughts.models.State;
 
 public class ResumeController extends Controller {
 
-	public ResumeController(Session session) {
-        super(session);
-    }
+	public ResumeController(Game game, State state) {
+		super(game, state);
+	}
     
     @Override
 	public void accept(ControllersVisitor controllersVisitor) {
@@ -14,11 +15,11 @@ public class ResumeController extends Controller {
 	}
 
 	public void next() {
-        this.session.state.next();
+        this.state.next();
 	}
 
 	public void reset() {
-        this.session.state.reset();
+        this.state.reset();
 	}
 
 }

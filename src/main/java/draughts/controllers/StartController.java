@@ -1,11 +1,12 @@
 package draughts.controllers;
 
-import draughts.models.Session;
+import draughts.models.Game;
+import draughts.models.State;
 
 public class StartController extends Controller {
 
-	public StartController(Session session) {
-        super(session);
+	public StartController(Game game, State state) {
+		super(game, state);
 	}
 
     @Override
@@ -14,7 +15,7 @@ public class StartController extends Controller {
     }
 
 	public void start() {
-        this.session.state.next();
+        this.state.next();
 	}
     
 }
