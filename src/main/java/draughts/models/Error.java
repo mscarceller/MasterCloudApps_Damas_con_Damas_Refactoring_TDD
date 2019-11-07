@@ -1,6 +1,7 @@
 package draughts.models;
 
 public enum Error {
+    ERROR_INPUT, 
     OUT_COORDINATE, 
     EMPTY_ORIGIN, 
     OPPOSITE_PIECE, 

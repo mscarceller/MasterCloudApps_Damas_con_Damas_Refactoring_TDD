@@ -15,13 +15,10 @@ public class PlayView extends SubView {
     public void interact(PlayController playController) {
         Error error = null;
         GameView gameView = new GameView();
-        String command = "";
         do { 
             gameView.write(playController);
-            command = readValidCoordinatesStringForColor(playController,gameView);
-            error = playController.move(
-                new Coordinate(command.substring(0, 2)), 
-                new Coordinate(command.substring(3, 5)));
+            Coordinate[] coordinates = readValidCoordinates(playController,gameView);
+            error = playController.move(coordinates[0],coordinates[1]);
             if (error != null){
                 console.writeln("Error!!!" + error.name());
             }
@@ -31,15 +28,27 @@ public class PlayView extends SubView {
         }
     }
 
-    public String readValidCoordinatesStringForColor(PlayController playController,GameView gameView){
+    public Coordinate[] readValidCoordinates(PlayController playController,GameView gameView){
         String color = PlayView.COLORS[playController.getColor().ordinal()];
-        String command = this.console.readString("Mueven las " + color + ": ");
-        while(!command.matches("[0-9][0-9]+([.][0-9][0-9])?$")){                           
-            MessageView.ERRORINPUT.writeln();
-            gameView.write(playController);
-            command = this.console.readString("Mueven las " + color + ": ");       
-        }
-        return command;
+        Coordinate[] coordinates = new Coordinate[2];
+        Error error;
+        do{
+            error = null;
+            String command = this.console.readString("Mueven las " + color + ": ");
+            if (command.matches("[0-9][0-9]+([.][0-9][0-9])?$")){
+                coordinates[0] = new Coordinate(command.substring(0, 2));
+                coordinates[1] = new Coordinate(command.substring(3, 5));
+                if (!coordinates[0].isValid() || !coordinates[1].isValid()) {
+                    error  = Error.OUT_COORDINATE;
+                }
+            }
+            else{
+                error  = Error.ERROR_INPUT;
+            }
+            if (error != null){
+                new ErrorView(error).writeln();
+            }
+        }while(error!=null);
+        return coordinates;
     }
-
 }

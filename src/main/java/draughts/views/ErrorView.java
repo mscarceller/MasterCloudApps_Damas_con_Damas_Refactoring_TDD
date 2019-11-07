@@ -1,0 +1,31 @@
+package draughts.views;
+
+import draughts.models.Error;
+import draughts.utils.Console;
+
+public class ErrorView{
+
+	static final String[] MESSAGES = { 
+		"No te entiendo: <d><d>{,<d><d>}[0-2]",
+		"No es una coordenada del tablero",
+        "No hay ficha que mover",
+        "No es una de tus fichas",
+        "No vas en diagonal",
+        "No respetas la distancia",
+        "No está vacío el destino",
+        "No avanzas",
+        "No comes contrarias"
+    };
+
+	Error error;
+	private static Console console = new Console();
+
+	public ErrorView(Error error) {
+		this.error = error;
+	}
+	
+	public void writeln() {
+		ErrorView.console.writeln(ErrorView.MESSAGES[this.error.ordinal()]);
+	}	
+	
+}
