@@ -20,7 +20,7 @@ public class PlayView extends SubView {
             Coordinate[] coordinates = readValidCoordinates(playController,gameView);
             error = playController.move(coordinates[0],coordinates[1]);
             if (error != null){
-                console.writeln("Error!!!" + error.name());
+                new ErrorView(error).writeln();
             }
         } while (error != null); 
         if (playController.isBlocked()){
