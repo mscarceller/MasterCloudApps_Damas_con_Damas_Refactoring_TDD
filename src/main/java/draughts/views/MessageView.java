@@ -6,6 +6,7 @@ public enum MessageView {
 
     TITTLE("Draughts"),
     LOOSER("Derrota!!! No puedes mover tus fichas!!!"),
+    ERRORINPUT("Error!!! No te entiendo: <d><d>.<d><d>"),
     RESUME("¿Queréis jugar otra");
 
     private String message;
