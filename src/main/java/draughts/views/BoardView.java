@@ -2,8 +2,9 @@ package draughts.views;
 
 import draughts.models.Board;
 import draughts.models.Coordinate;
+import draughts.utils.WithConsoleView;
 
-public class BoardView extends SubView {
+public class BoardView extends WithConsoleView {
 
     public BoardView(){
     }

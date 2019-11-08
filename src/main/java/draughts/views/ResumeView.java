@@ -2,8 +2,9 @@ package draughts.views;
 
 import draughts.controllers.ResumeController;
 import draughts.utils.YesNoDialog;
+import draughts.utils.WithConsoleView;
 
-public class ResumeView extends SubView {
+public class ResumeView extends WithConsoleView {
 
     private YesNoDialog yesNoDialog;
 

@@ -3,8 +3,9 @@ package draughts.views;
 import draughts.controllers.PlayController;
 import draughts.models.Error;
 import draughts.models.Coordinate;
+import draughts.utils.WithConsoleView;
 
-public class PlayView extends SubView {
+public class PlayView extends WithConsoleView {
 
     private static final String[] COLORS = {"blancas", "negras"};
 
