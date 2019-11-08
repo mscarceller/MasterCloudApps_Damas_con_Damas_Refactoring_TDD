@@ -23,7 +23,7 @@ public class BoardTest {
     public void testGivenNewBoardWhenPutPiecesThenIsNotEmpty() {
         Piece piece = new Piece(Color.WHITE);
         Coordinate coordinate = new Coordinate(5,4);
-        board.put(coordinate, piece);
+        board.putPiece(coordinate, piece);
         assertFalse(board.getPieces(Color.WHITE).isEmpty());
     }
 
@@ -31,9 +31,9 @@ public class BoardTest {
     public void testGivenNewBoardWhenPutAndremovePiecesThenIsOK() {
         Piece piece = new Piece(Color.WHITE);
         Coordinate coordinate = new Coordinate(5,4);
-        board.put(coordinate, piece);
+        board.putPiece(coordinate, piece);
         assertFalse(board.getPieces(Color.WHITE).isEmpty());
-        board.remove(coordinate);
+        board.removePiece(coordinate);
         assertTrue(board.getPieces(Color.WHITE).isEmpty());
     }
 

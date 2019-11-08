@@ -14,7 +14,7 @@ public class Game {
 				Coordinate coordinate = new Coordinate(i, j);
 				Piece piece = this.getInitialPiece(coordinate);
 				if (piece != null) {
-					this.board.put(coordinate, piece);
+					this.board.putPiece(coordinate, piece);
 				}
 			}
 		}
@@ -61,9 +61,9 @@ public class Game {
 			if (this.board.getPiece(between) == null) {
 				return Error.EATING_EMPTY;
 			}
-			this.board.remove(between);
+			this.board.removePiece(between);
 		}
-		this.board.move(origin, target);
+		this.board.movePiece(origin, target);
 		this.turn.change();
 		return null;
 	}
@@ -74,11 +74,6 @@ public class Game {
 
 	public Color getColor(Coordinate coordinate) {
 		return this.board.getColor(coordinate);
-	}
-
-	@Override
-	public String toString() {
-		return this.board + "\n" + this.turn;
 	}
 
 	public Color getColor() {
@@ -95,5 +90,10 @@ public class Game {
 
 	public int getDimension() {
 		return this.board.getDimension();
+	}
+
+	@Override
+	public String toString() {
+		return this.board + "\n" + this.turn;
 	}
 }

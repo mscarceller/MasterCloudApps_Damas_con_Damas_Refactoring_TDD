@@ -23,18 +23,18 @@ public class Board {
         return this.squares[coordinate.getRow()][coordinate.getColumn()];
     }
 
-    void put(Coordinate coordinate, Piece piece){
+    void putPiece(Coordinate coordinate, Piece piece){
         assert piece != null;
         this.getSquare(coordinate).put(piece);
     }
 
-    Piece remove(Coordinate coordinate) {
+    Piece removePiece(Coordinate coordinate) {
         assert this.getPiece(coordinate) != null;
         return this.getSquare(coordinate).remove();
     }
 
-    void move(Coordinate origin, Coordinate target) {
-        this.put(target, this.remove(origin));
+    void movePiece(Coordinate origin, Coordinate target) {
+        this.putPiece(target, this.removePiece(origin));
     }
 
     Piece getPiece(Coordinate coordinate) {
