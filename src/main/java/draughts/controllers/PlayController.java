@@ -1,5 +1,6 @@
 package draughts.controllers;
 
+import draughts.models.Board;
 import draughts.models.Color;
 import draughts.models.Coordinate;
 import draughts.models.Piece;
@@ -19,6 +20,10 @@ public class PlayController extends Controller {
 
 	public Piece getPiece(Coordinate coordinate) {
 		return this.game.getPiece(coordinate);
+	}
+
+	public Board getBoard(){
+		return this.game.getBoard();
 	}
 
 	public Color getColor() {

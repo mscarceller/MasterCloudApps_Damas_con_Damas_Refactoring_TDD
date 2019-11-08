@@ -18,19 +18,19 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import draughts.controllers.StartController;
+import draughts.controllers.PlayController;
 import draughts.models.Game;
 import draughts.models.State;
 import draughts.utils.Console;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GameViewTest {
+public class BoardViewTest {
 
     @Mock
     Console console;
 
     @InjectMocks
-    GameView gameView;
+    BoardView boardView;
 
     @Before
     public void before() {
@@ -44,8 +44,8 @@ public class GameViewTest {
     public void testInteract(){
 		State state = new State();
         Game game = new Game(); 
-        StartController startController = new StartController(game, state);
-        this.gameView.write(startController);
+        PlayController playController = new PlayController(game, state);
+        this.boardView.writeBoard(playController.getBoard());
         verify(console, times(90)).write(argument.capture());
         List<String> rows = Arrays.asList(
         " 12345678",

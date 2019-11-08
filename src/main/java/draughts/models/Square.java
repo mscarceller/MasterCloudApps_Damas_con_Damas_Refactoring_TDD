@@ -1,6 +1,6 @@
 package draughts.models;
 
-class Square {
+public class Square {
 
     private Piece piece;
 
@@ -17,7 +17,7 @@ class Square {
         return piece;
     }
 
-    Piece getPiece() {
+    public Piece getPiece() {
         return this.piece;
     }
 
@@ -30,6 +30,13 @@ class Square {
             return null;
         }
 		return this.piece.getColor();
+    }
+    
+    public String getPieceSymbol() {
+        if (piece == null){
+            return " ";
+        }
+		return this.piece.getPieceSymbol();
 	}
 
 }

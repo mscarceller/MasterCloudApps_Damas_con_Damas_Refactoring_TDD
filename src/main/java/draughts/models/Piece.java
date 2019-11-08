@@ -2,6 +2,7 @@ package draughts.models;
 
 public class Piece {
 
+	final String[] letters = {"b","n"};
 	private Color color;
 
 	Piece(Color color){
@@ -20,28 +21,31 @@ public class Piece {
 		return difference<0;
 	}
 	
-
 	public boolean isDiagonalMovement(Coordinate origin,Coordinate target){
-		if (origin.isDiagonal(target)) 
+		if (origin.isDiagonal(target)){
 			return true;
+		}
 		return false;
 	}
 
 	public boolean isAdvancedMovement(Coordinate origin,Coordinate target){
-		if (this.isAdvanced(origin, target))
+		if (this.isAdvanced(origin, target)){
 			return true;
+		}
 		return false;
 	}
 
 	public boolean isBadDistanceMovement(Coordinate origin,Coordinate target){
-		if (origin.diagonalDistance(target) >= 3)
+		if (origin.diagonalDistance(target) >= 3){
 			return true;
+		}
 		return false;
 	}
 
 	public boolean isEatingMovement(Coordinate origin, Coordinate target){
-		if (origin.diagonalDistance(target) == 2)
+		if (origin.diagonalDistance(target) == 2){
 			return true;
+		}
 		return false;
 	}
 
@@ -49,4 +53,7 @@ public class Piece {
 		return origin.betweenDiagonal(target);
 	}
 
+	public String getPieceSymbol(){
+		return letters[this.getColor().ordinal()];
+	}
 }

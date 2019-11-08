@@ -3,13 +3,13 @@ package draughts.models;
 import java.util.ArrayList;
 import java.util.List;
 
-class Board {
+public class Board {
 
     private static final int DIMENSION = 8;
 
     private Square[][] squares;
 
-    Board() {
+    public Board() {
         this.squares = new Square[this.getDimension()][this.getDimension()];
         for (int i = 0; i < this.getDimension(); i++) {
             for (int j = 0; j < this.getDimension(); j++) {
@@ -18,7 +18,7 @@ class Board {
         }
     }
 
-    private Square getSquare(Coordinate coordinate){
+    public Square getSquare(Coordinate coordinate){
         assert coordinate!=null && coordinate.isValid();
         return this.squares[coordinate.getRow()][coordinate.getColumn()];
     }
@@ -49,6 +49,10 @@ class Board {
         return this.getSquare(coordinate).getColor();
     }
 
+    public int getDimension() {
+		return Board.DIMENSION;
+	}
+
     List<Piece> getPieces(Color color) {
         List<Piece> pieces = new ArrayList<Piece>();
         for (int i = 0; i < this.getDimension(); i++) {
@@ -68,41 +72,4 @@ class Board {
         return null;
     }
     
-    int getDimension() {
-		return Board.DIMENSION;
-	}
-
-    @Override
-    public String toString() {
-        String string = "";
-        string += this.toStringHorizontalNumbers();
-        for (int i = 0; i < this.getDimension(); i++) {
-            string += this.toStringHorizontalPiecesWithNumbers(i);
-        }
-        string += this.toStringHorizontalNumbers();
-        return string;
-    }
-
-    private String toStringHorizontalNumbers(){
-        String string = " ";
-        for (int j = 0; j < Board.DIMENSION; j++) {
-            string += j;
-        }
-        return string + "\n";
-    }
-
-    private String toStringHorizontalPiecesWithNumbers(int row){
-        String string = "" + row;
-        for (int j = 0; j < this.getDimension(); j++) {
-            Piece piece = this.getPiece(new Coordinate(row, j));
-            if (piece == null) {
-                string += " ";
-            } else {
-                final String[] letters = {"b","n"};
-                string += letters[piece.getColor().ordinal()];
-            }
-        }
-        return string + row + "\n";
-    }
-
 }

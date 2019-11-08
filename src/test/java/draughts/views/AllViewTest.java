@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ 
-    GameViewTest.class, 
+    BoardViewTest.class, 
     PlayViewTest.class, 
     ResumeViewTest.class } )
 public final class AllViewTest {

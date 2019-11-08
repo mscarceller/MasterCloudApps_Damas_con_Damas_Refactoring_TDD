@@ -37,33 +37,25 @@ public class Game {
 	}
 
 	public Error move(Coordinate origin, Coordinate target) {
-
 		if (board.isEmpty(origin)) {
 			return Error.EMPTY_ORIGIN;
 		}
-
 		Piece piece = this.board.getPiece(origin);
 		if (this.turn.getColor() != piece.getColor()) {
 			return Error.OPPOSITE_PIECE;
 		}
-
 		if (!piece.isDiagonalMovement(origin,target)){
 			return Error.NOT_DIAGONAL;
 		}
-		
 		if (!piece.isAdvancedMovement(origin,target)){
 			return Error.NOT_ADVANCED;
 		}
-
 		if (piece.isBadDistanceMovement(origin,target)){
 			return Error.BAD_DISTANCE;
 		}
-
 		if (!this.board.isEmpty(target)) {
 			return Error.NOT_EMPTY_TARGET;
 		}
-
-
 		if (piece.isEatingMovement(origin,target)){
 			Coordinate between = piece.getEatedPieceCoordinate(origin, target);
 			if (this.board.getPiece(between) == null) {
@@ -71,13 +63,14 @@ public class Game {
 			}
 			this.board.remove(between);
 		}
-
 		this.board.move(origin, target);
 		this.turn.change();
 		return null;
 	}
 
-	
+	public Board getBoard(){
+		return this.board;
+	}
 
 	public Color getColor(Coordinate coordinate) {
 		return this.board.getColor(coordinate);
@@ -103,5 +96,4 @@ public class Game {
 	public int getDimension() {
 		return this.board.getDimension();
 	}
-
 }

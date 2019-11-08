@@ -14,10 +14,10 @@ public class PlayView extends SubView {
 
     public void interact(PlayController playController) {
         Error error = null;
-        GameView gameView = new GameView();
+        BoardView boardView = new BoardView();
         do { 
-            gameView.write(playController);
-            Coordinate[] coordinates = readValidCoordinates(playController,gameView);
+            boardView.writeBoard(playController.getBoard());
+            Coordinate[] coordinates = readValidCoordinates(playController);
             error = playController.move(coordinates[0],coordinates[1]);
             if (error != null){
                 new ErrorView(error).writeln();
@@ -29,7 +29,7 @@ public class PlayView extends SubView {
         }
     }
 
-    public Coordinate[] readValidCoordinates(PlayController playController,GameView gameView){
+    public Coordinate[] readValidCoordinates(PlayController playController){
         String color = PlayView.COLORS[playController.getColor().ordinal()];
         Coordinate[] coordinates = new Coordinate[2];
         Error error;
