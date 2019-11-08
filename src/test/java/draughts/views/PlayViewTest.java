@@ -43,7 +43,6 @@ public class PlayViewTest {
     
     @Test
     public void testInteract(){
-
         when(console.readString("Mueven las negras: ")).thenReturn("32.41");
         playView.interact(playController);
         verify(playController).move(new Coordinate(2,1), new Coordinate(3, 0));

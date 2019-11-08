@@ -20,34 +20,22 @@ public class Piece {
 		}
 		return difference<0;
 	}
-	
+
 	public boolean isDiagonalMovement(Coordinate origin,Coordinate target){
-		if (origin.isDiagonal(target)){
-			return true;
-		}
-		return false;
-	}
+        return origin.isDiagonal(target);
+    }
 
 	public boolean isAdvancedMovement(Coordinate origin,Coordinate target){
-		if (this.isAdvanced(origin, target)){
-			return true;
-		}
-		return false;
-	}
+        return this.isAdvanced(origin, target);
+    }
 
 	public boolean isBadDistanceMovement(Coordinate origin,Coordinate target){
-		if (origin.diagonalDistance(target) >= 3){
-			return true;
-		}
-		return false;
-	}
+        return (origin.diagonalDistance(target) >= 3);
+    }
 
 	public boolean isEatingMovement(Coordinate origin, Coordinate target){
-		if (origin.diagonalDistance(target) == 2){
-			return true;
-		}
-		return false;
-	}
+        return origin.diagonalDistance(target) == 2;
+    }
 
 	public Coordinate getEatedPieceCoordinate(Coordinate origin, Coordinate target){
 		return origin.betweenDiagonal(target);

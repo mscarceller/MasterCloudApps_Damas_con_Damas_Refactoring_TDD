@@ -2,9 +2,9 @@ package draughts.utils;
 
 import draughts.utils.Console;
 
-public abstract class WithConsoleView {
+public class WithConsoleView {
 
-	protected final Console console;
+	protected Console console;
 
 	protected WithConsoleView() {
 		this.console = new Console();
