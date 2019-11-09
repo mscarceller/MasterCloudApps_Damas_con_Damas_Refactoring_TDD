@@ -20,20 +20,21 @@ public class PlayView extends WithConsoleView {
         Error error = null;
         String color = PlayView.COLORS[playController.getColor().ordinal()];
         String command ="";
+        boardView.writeBoard(playController.getBoard());
+        this.checkIfGameOver(playController);
         do { 
-            boardView.writeBoard(playController.getBoard());
             command = readValidCommand(color);
             if (command.equals(GIVEUP_COMMAND)){
                 this.cancelGame(playController);
             }
             else{
                 error = this.tryToMove(playController, command); 
-            }
-            if (error != null){
                 new ErrorView(error).writeln();
             }
         } while (error != null); 
+    }
 
+    private void checkIfGameOver(PlayController playController){
         if (playController.isBlocked()){
             MessageView.LOOSER.writeln();
             playController.gameOver();
