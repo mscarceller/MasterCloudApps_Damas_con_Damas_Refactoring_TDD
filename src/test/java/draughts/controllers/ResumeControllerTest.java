@@ -16,11 +16,11 @@ public class ResumeControllerTest {
         Game game = new Game(); 
         ResumeController resumeController = new ResumeController(game, state);
         assertEquals(StateValue.INITIAL, state.getValueState());
-        resumeController.next();
+        resumeController.exitGame();
         assertEquals(StateValue.IN_GAME, state.getValueState());
-        resumeController.next();
+        resumeController.exitGame();
         assertEquals(StateValue.FINAL, state.getValueState());
-        resumeController.reset();
+        resumeController.newGame();
         assertEquals(StateValue.INITIAL, state.getValueState());
     }
 
@@ -30,12 +30,12 @@ public class ResumeControllerTest {
         Game game = new Game(); 
         ResumeController resumeController = new ResumeController(game, state);
         assertEquals(StateValue.INITIAL, state.getValueState());
-        resumeController.next();
+        resumeController.exitGame();
         assertEquals(StateValue.IN_GAME, state.getValueState());
-        resumeController.next();
+        resumeController.exitGame();
         assertEquals(StateValue.FINAL, state.getValueState());
-        resumeController.next();
+        resumeController.exitGame();
         assertEquals(StateValue.EXIT, state.getValueState());
-        resumeController.next();
+        resumeController.exitGame();
     }
 }

@@ -6,6 +6,7 @@ import draughts.utils.WithConsoleView;
 
 public class ResumeView extends WithConsoleView {
 
+    private static final String RESUME = "¿Queréis jugar otra";
     private YesNoDialog yesNoDialog;
 
     public ResumeView(){
@@ -14,11 +15,6 @@ public class ResumeView extends WithConsoleView {
     }
 
     public void interact(ResumeController resumeController) {
-        if (this.yesNoDialog.read(MessageView.LOOSER.toString())){
-            resumeController.reset();
-        } else {
-            resumeController.next();
-        }
-
+        resumeController.isNewGame(this.yesNoDialog.read(RESUME));
     }
 }

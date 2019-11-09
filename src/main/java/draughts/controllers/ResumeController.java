@@ -14,12 +14,20 @@ public class ResumeController extends Controller {
 		controllersVisitor.visit(this);
 	}
 
-	public void next() {
-        this.state.next();
+	public void isNewGame(boolean newGame) {
+		if (newGame) {
+			this.newGame();
+		} else {
+			this.exitGame();
+		}
 	}
 
-	public void reset() {
-        this.state.reset();
+	public void newGame(){
+		this.game.initGame();
+		this.state.reset();
 	}
 
+	public void exitGame(){
+		this.state.next();
+	}
 }

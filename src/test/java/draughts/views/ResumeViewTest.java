@@ -36,14 +36,14 @@ public class ResumeViewTest {
     public void givenResumeViewWhenPlayerWantsToResumeThenResumeOK(){
         when(yesNoDialog.read(anyString())).thenReturn(true);
         resumeView.interact(resumeController);
-        verify(resumeController).reset();
+        verify(resumeController).isNewGame(true);
     }
 
     @Test
     public void givenResumeViewWhenPlayerWantsToExitThenControlerNextState(){
         when(yesNoDialog.read(anyString())).thenReturn(false);
         resumeView.interact(resumeController);
-        verify(resumeController).next();
+        verify(resumeController).isNewGame(false);
     }
 
 }
