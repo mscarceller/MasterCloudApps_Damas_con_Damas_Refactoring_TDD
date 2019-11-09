@@ -62,4 +62,11 @@ public class PlayViewTest {
         verify(playController).move(new Coordinate(2,1), new Coordinate(3, 0));
     }
 
+    @Test()
+    public void testGivenPlayViewWhenGiveUpCommandThenNextState() {
+        when(console.readString("Mueven las negras: ")).thenReturn("-1");
+        playView.interact(playController);
+        verify(playController).cancelGame();
+    }
+
 }

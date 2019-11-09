@@ -7,6 +7,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({ 
     BoardViewTest.class, 
     PlayViewTest.class, 
+    CancelViewTest.class,
     ResumeViewTest.class } )
 public final class AllViewTest {
 }

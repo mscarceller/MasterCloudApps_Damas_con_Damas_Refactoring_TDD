@@ -10,13 +10,22 @@ import draughts.models.Game;
 
 public class PlayController extends Controller {
 
+	private CancelController cancelController;
+	private MoveController moveController;
+
     public PlayController(Game game, State state) {
 		super(game, state);
+		this.cancelController = new CancelController(state);
+		this.moveController = new MoveController(game);
 	}
 
 	public Error move(Coordinate origin, Coordinate target){
-		return this.game.move(origin, target);
-    }
+		return this.moveController.move(origin, target);
+	}
+
+	public void cancelGame(){
+		this.cancelController.cancelGame();
+	}
 
 	public Piece getPiece(Coordinate coordinate) {
 		return this.game.getPiece(coordinate);
