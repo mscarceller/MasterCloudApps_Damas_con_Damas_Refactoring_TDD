@@ -7,33 +7,15 @@ public class Game {
 	private Turn turn;
 
 	public Game() {
-		this.turn = new Turn();
 		this.board = new Board();
-		for (int i = 0; i < this.board.getDimension(); i++) {
-			for (int j = 0; j < this.board.getDimension(); j++) {
-				Coordinate coordinate = new Coordinate(i, j);
-				Piece piece = this.getInitialPiece(coordinate);
-				if (piece != null) {
-					this.board.putPiece(coordinate, piece);
-				}
-			}
-		}
+		this.turn = new Turn();
+		this.initGame();	
 	}
 
-	private Piece getInitialPiece(Coordinate coordinate) {
-		if (coordinate.isBlack()) {
-			final int row = coordinate.getRow();
-			Color color = null;
-			if (row <= 2) {
-				color = Color.BLACK;
-			} else if (row >= 5) {
-				color = Color.WHITE;
-			}
-			if (color != null) {
-				return new Piece(color);
-			}
-		}
-		return null;
+	public void initGame(){
+		this.board.setInitialSquares();
+		 this.board.setInitialPieces();
+		 this.turn.setInitialTurn();
 	}
 
 	public Error move(Coordinate origin, Coordinate target) {

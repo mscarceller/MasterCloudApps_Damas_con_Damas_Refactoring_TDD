@@ -10,6 +10,10 @@ public class Board {
     private Square[][] squares;
 
     public Board() {
+        this.setInitialSquares();
+    }
+
+    void setInitialSquares(){
         this.squares = new Square[this.getDimension()][this.getDimension()];
         for (int i = 0; i < this.getDimension(); i++) {
             for (int j = 0; j < this.getDimension(); j++) {
@@ -17,6 +21,34 @@ public class Board {
             }
         }
     }
+    
+	void setInitialPieces(){
+		for (int i = 0; i < this.getDimension(); i++) {
+			for (int j = 0; j < this.getDimension(); j++) {
+				Coordinate coordinate = new Coordinate(i, j);
+				Piece piece = this.getInitialPiece(coordinate);
+				if (piece != null) {
+					this.putPiece(coordinate, piece);
+				}
+			}
+		}
+	}
+
+	private Piece getInitialPiece(Coordinate coordinate) {
+		if (coordinate.isBlack()) {
+			final int row = coordinate.getRow();
+			Color color = null;
+			if (row <= 2) {
+				color = Color.BLACK;
+			} else if (row >= 5) {
+				color = Color.WHITE;
+			}
+			if (color != null) {
+				return new Piece(color);
+			}
+		}
+		return null;
+	}
 
     public Square getSquare(Coordinate coordinate){
         assert coordinate!=null && coordinate.isValid();
