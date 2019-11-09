@@ -29,6 +29,8 @@ public class PlayView extends WithConsoleView {
             }
             else{
                 error = this.tryToMove(playController, command); 
+            }
+            if (error != null){
                 new ErrorView(error).writeln();
             }
         } while (error != null); 
