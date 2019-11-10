@@ -14,7 +14,7 @@ public class BoardView extends WithConsoleView {
         console.writeln();
         this.writeNumbersLine(DIMENSION);
         for(int coordY = 0 ; coordY < DIMENSION ; coordY++){
-           console.write(String.valueOf((coordY+1)));
+            console.write(String.valueOf((coordY+1)));
             for(int coordX = 0 ; coordX < DIMENSION ; coordX++){
                 console.write(board.getSquare(new Coordinate(coordY,coordX)).getPieceSymbol());
             }

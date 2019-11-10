@@ -11,7 +11,7 @@ public enum MessageView {
     private String message;
     private static Console console = new Console();
 
-    private MessageView(String message){
+    MessageView(String message){
         this.message = message;
     }
 

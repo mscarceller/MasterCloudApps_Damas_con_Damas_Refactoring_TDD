@@ -16,24 +16,22 @@ public class PlayView extends WithConsoleView {
     }
 
     public void interact(PlayController playController) {
-        BoardView boardView = new BoardView();
         Error error = null;
         String color = PlayView.COLORS[playController.getColor().ordinal()];
-        String command ="";
-        boardView.writeBoard(playController.getBoard());
+        new BoardView().writeBoard(playController.getBoard());
         this.checkIfGameOver(playController);
-        do { 
-            command = readValidCommand(color);
+        do {
+            String command = readValidCommand(color);
             if (command.equals(GIVEUP_COMMAND)){
                 this.cancelGame(playController);
             }
             else{
-                error = this.tryToMove(playController, command); 
+                error = this.tryToMove(playController, command);
             }
             if (error != null){
                 new ErrorView(error).writeln();
             }
-        } while (error != null); 
+        } while (error != null);
     }
 
     private void checkIfGameOver(PlayController playController){
@@ -44,7 +42,7 @@ public class PlayView extends WithConsoleView {
     }
 
     private String readValidCommand(String color){
-        String command = "";
+        String command;
         Error error;
         do{
             error = null;

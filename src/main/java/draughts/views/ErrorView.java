@@ -25,7 +25,7 @@ public class ErrorView{
 	}
 	
 	public void writeln() {
-		ErrorView.console.writeln("Error!!!" + ErrorView.MESSAGES[this.error.ordinal()]);
+		ErrorView.console.writeln("Error!!! " + ErrorView.MESSAGES[this.error.ordinal()]);
 	}	
 	
 }

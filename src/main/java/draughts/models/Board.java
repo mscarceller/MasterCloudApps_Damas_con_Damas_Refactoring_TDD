@@ -21,7 +21,7 @@ public class Board {
             }
         }
     }
-    
+
 	void setInitialPieces(){
 		for (int i = 0; i < this.getDimension(); i++) {
 			for (int j = 0; j < this.getDimension(); j++) {
@@ -76,7 +76,7 @@ public class Board {
     boolean isEmpty(Coordinate coordinate) {
         return this.getSquare(coordinate).isEmpty();
     }
-    
+
     Color getColor(Coordinate coordinate) {
         return this.getSquare(coordinate).getColor();
     }
@@ -90,18 +90,18 @@ public class Board {
         for (int i = 0; i < this.getDimension(); i++) {
             for (int j = 0; j < this.getDimension(); j++) {
                 Piece piece = checkPieceColor(color, this.squares[i][j]);
-                if (piece!=null) 
+                if (piece!=null)
                     pieces.add(piece);
             }
         }
 		return pieces;
     }
-    
-    Piece checkPieceColor(Color color, Square square){
+
+    private Piece checkPieceColor(Color color, Square square){
         Piece piece = square.getPiece();
         if (piece != null && piece.getColor()==color)
             return piece;
         return null;
     }
-    
+
 }
