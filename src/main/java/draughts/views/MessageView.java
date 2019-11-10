@@ -5,8 +5,7 @@ import draughts.utils.Console;
 public enum MessageView {
 
     TITTLE("Draughts"),
-    LOOSER("Derrota!!! No puedes mover tus fichas!!!"),
-    RESUME("¿Queréis jugar otra");
+    LOOSER("Derrota!!! No puedes mover tus fichas!!!");
 
     private String message;
     private static Console console = new Console();
