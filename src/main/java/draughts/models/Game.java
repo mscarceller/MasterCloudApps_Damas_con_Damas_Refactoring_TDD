@@ -74,8 +74,4 @@ public class Game {
 		return this.board.getDimension();
 	}
 
-	@Override
-	public String toString() {
-		return this.board + "\n" + this.turn;
-	}
 }
