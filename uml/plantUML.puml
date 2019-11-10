@@ -1,0 +1,146 @@
+@startuml
+
+title Diseño Modelo/Vista/Controlador con Presentador del Modelo/Vista/Controlador
+
+class Draughts {
++ play()
+}
+Draughts *-down-> Logic
+Draughts *-down-> View
+
+class View #orange {
++ interact(Controller)
+}
+
+class StartView #orange {
++ interact(StartController)
+}
+
+class PlayView  #orange {
++ interact(PlayController)
+}
+
+class CancelView  #orange {
+}
+
+class ResumeView  #orange {
++ interact(ResumeController)
+}
+
+class BoardView #orange{
+}
+
+class SquareView #orange{
+}
+
+class PieceView #orange{
+}
+
+StartView ..> StartController
+PlayView ..> PlayController
+CancelView ..> PlayController
+ResumeView ..> ResumeController
+
+View *-down-> StartView
+View *-down-> PlayView
+View *-down-> CancelView
+View *-down-> ResumeView
+StartView *-down-> BoardView
+PlayView *-down-> BoardView
+BoardView ..> SquareView
+
+View ..> AcceptController
+
+class Logic{
+    - State state;
+    - Game game;
+    + nextState()
+    + getController()
+}
+Logic *--> State
+Logic *--> Game
+Logic *-down-> AcceptController
+
+class Controller #DeepSkyBlue{
+}
+
+class AcceptController #DeepSkyBlue{
+}
+
+Controller <|-down- AcceptController
+AcceptController <|-down- StartController
+AcceptController <|-down- PlayController
+Controller <|-down- MoveController
+Controller <|-down- CancelController
+AcceptController <|-down- ResumeController
+Controller o--> Game
+
+class StartController #DeepSkyBlue{
+    +initGame()
+}
+
+class MoveController #DeepSkyBlue{
+    + move(Coordinate origin, Coordinate target)
+}
+
+class CancelController #DeepSkyBlue{
+    + cancelGame()
+}
+
+class ResumeController #DeepSkyBlue{
+    +resumeGame()
+}
+
+class PlayController #DeepSkyBlue{
+    + move(Coordinate origin, Coordinate target)
+    + cancelgame()
+}
+PlayController ..> Coordinate
+
+PlayView ..> Coordinate
+
+class Coordinate{
+    -int x
+    -int y
+}
+
+PlayController *-down-> CancelController
+PlayController *-down-> MoveController
+
+
+class Game{
+}
+Game *-down-> Board
+Game *-down-> Turn
+Game ..> Error
+
+class Board{
+}
+Board *-down-> "8x8" Square
+Board *-down-> "1..2x12" Piece
+Board ..> Error
+
+class Square{
+    +Piece piece
+}
+Square  --> "0..1" Piece
+
+class Piece{
+}
+
+Piece *--> Color 
+
+class Color{
+}
+
+class Turn{
+}
+Turn *--> Color
+
+class State{
+}
+
+class Error{
+}
+
+@enduml

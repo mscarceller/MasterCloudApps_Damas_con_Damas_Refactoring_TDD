@@ -1,0 +1,8 @@
+@startuml
+title Diagrama de Actores y Casos de Uso \n
+actor Player
+Player --> (Start)
+Player --> (MovePiece)
+Player --> (CancelGame)
+Player --> (Resume)
+@enduml

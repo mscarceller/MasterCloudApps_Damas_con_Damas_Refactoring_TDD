@@ -1,0 +1,17 @@
+title Diagrama de Contexto \n
+
+
+[*] --> INITIAL
+
+INITIAL --> IN_GAME : Start
+IN_GAME --> IN_GAME : MovePiece
+IN_GAME --> FINAL : IsFinished
+IN_GAME --> FINAL : Cancel
+
+state " " as Condicion <<choice>>
+
+FINAL --> Condicion : resume
+Condicion --> INITIAL : [yes]
+Condicion --> [*] : [no]
+
+@enduml
