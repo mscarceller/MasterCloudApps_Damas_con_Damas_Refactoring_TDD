@@ -28,7 +28,7 @@ public class BoardTest {
     }
 
     @Test
-    public void testGivenNewBoardWhenPutAndremovePiecesThenIsOK() {
+    public void testGivenNewBoardWhenPutAndRemovePiecesThenIsOK() {
         Piece piece = new Piece(Color.WHITE);
         Coordinate coordinate = new Coordinate(5,4);
         board.putPiece(coordinate, piece);
