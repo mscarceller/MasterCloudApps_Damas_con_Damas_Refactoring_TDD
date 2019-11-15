@@ -3,7 +3,7 @@ package draughts.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board {
+public class Board implements PieceProvider {
 
     private static final int DIMENSION = 8;
 
@@ -69,11 +69,13 @@ public class Board {
         this.putPiece(target, this.removePiece(origin));
     }
 
-    Piece getPiece(Coordinate coordinate) {
+    @Override
+    public Piece getPiece(Coordinate coordinate) {
         return this.getSquare(coordinate).getPiece();
     }
 
-    boolean isEmpty(Coordinate coordinate) {
+    @Override
+    public boolean isEmpty(Coordinate coordinate) {
         return this.getSquare(coordinate).isEmpty();
     }
 

@@ -1,5 +1,7 @@
 package draughts.models;
 
+import java.util.List;
+
 public class Game {
 
 	private Board board;
@@ -12,42 +14,37 @@ public class Game {
 		this.initGame();	
 	}
 
+	public void setBoard(Board board){
+		this.board = board;
+	}
+
 	public void initGame(){
 		this.board.setInitialSquares();
-		 this.board.setInitialPieces();
-		 this.turn.setInitialTurn();
+		this.board.setInitialPieces();
+		this.turn.setInitialTurn();
 	}
 
 	public Error move(Coordinate origin, Coordinate target) {
-		if (board.isEmpty(origin)) {
-			return Error.EMPTY_ORIGIN;
-		}
+		assert this.isCorrect(origin, target) == null;
 		Piece piece = this.board.getPiece(origin);
-		if (this.turn.getColor() != piece.getColor()) {
-			return Error.OPPOSITE_PIECE;
-		}
-		if (!piece.isDiagonalMovement(origin,target)){
-			return Error.NOT_DIAGONAL;
-		}
-		if (!piece.isAdvancedMovement(origin,target)){
-			return Error.NOT_ADVANCED;
-		}
-		if (piece.isBadDistanceMovement(origin,target)){
-			return Error.BAD_DISTANCE;
-		}
-		if (!this.board.isEmpty(target)) {
-			return Error.NOT_EMPTY_TARGET;
-		}
 		if (piece.isEatingMovement(origin,target)){
-			Coordinate between = piece.getEatedPieceCoordinate(origin, target);
-			if (this.board.getPiece(between) == null) {
-				return Error.EATING_EMPTY;
-			}
-			this.board.removePiece(between);
+			this.board.removePiece(piece.getEatedPieceCoordinate(origin, target));
 		}
 		this.board.movePiece(origin, target);
 		this.turn.change();
 		return null;
+	}
+
+	public Error isCorrect(Coordinate origin, Coordinate target){
+		assert origin != null;
+		assert target != null;
+		if (board.isEmpty(origin)) {
+			return Error.EMPTY_ORIGIN;
+		}
+		if (this.turn.getColor() != this.board.getColor(origin)) {
+			return Error.OPPOSITE_PIECE;
+		}
+		return this.board.getPiece(origin).isCorrect(origin, target, board);
 	}
 
 	public Board getBoard(){
@@ -67,7 +64,15 @@ public class Game {
 	}
 
 	public boolean isBlocked() {
-		return this.board.getPieces(this.turn.getColor()).isEmpty();
+		return (this.areMorePieces(this.getColor()) && this.areAvailableMovements(this.getColor()));
+	}
+
+	public boolean areMorePieces(Color color){
+		return (!this.board.getPieces(color).isEmpty());
+	}
+
+	public boolean areAvailableMovements(Color color){
+		return true;
 	}
 
 	public int getDimension() {

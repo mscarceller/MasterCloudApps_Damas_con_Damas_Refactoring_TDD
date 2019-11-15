@@ -20,6 +20,7 @@ public class PlayController extends Controller {
 	}
 
 	public Error move(Coordinate origin, Coordinate target){
+		assert this.isCorrect(origin, target) == null;
 		return this.moveController.move(origin, target);
 	}
 
@@ -27,12 +28,14 @@ public class PlayController extends Controller {
 		this.cancelController.cancelGame();
 	}
 
+	public Error isCorrect(Coordinate origin, Coordinate target){
+		assert origin != null;
+		assert target != null;
+		return this.game.isCorrect(origin, target);
+	}	
+
 	public Piece getPiece(Coordinate coordinate) {
 		return this.game.getPiece(coordinate);
-	}
-
-	public Board getBoard(){
-		return this.game.getBoard();
 	}
 
 	public Color getColor() {
@@ -47,8 +50,13 @@ public class PlayController extends Controller {
 		return this.game.isBlocked();
 	}	
 
+	public Board getBoard(){
+		return this.game.getBoard();
+	}
+
 	@Override
 	public void accept(ControllersVisitor controllersVisitor) {
+		assert controllersVisitor != null;
 		controllersVisitor.visit(this);
 	}
 

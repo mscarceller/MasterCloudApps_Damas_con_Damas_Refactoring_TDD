@@ -5,6 +5,9 @@ public class Piece {
 	final String[] letters = {"b","n"};
 	private Color color;
 
+	private static final int MAX_DISTANCE = 2;
+
+
 	Piece(Color color){
 		this.color = color;
 	}
@@ -21,17 +24,27 @@ public class Piece {
 		return difference<0;
 	}
 
-	public boolean isDiagonalMovement(Coordinate origin,Coordinate target){
-        return origin.isDiagonal(target);
-    }
-
-	public boolean isAdvancedMovement(Coordinate origin,Coordinate target){
-        return this.isAdvanced(origin, target);
-    }
-
-	public boolean isBadDistanceMovement(Coordinate origin,Coordinate target){
-        return (origin.diagonalDistance(target) >= 3);
-    }
+	Error isCorrect(Coordinate origin, Coordinate target, PieceProvider pieceProvider) {
+		if (!origin.isDiagonal(target)) {
+			return Error.NOT_DIAGONAL;
+		}
+		if (!pieceProvider.isEmpty(target)) {
+			return Error.NOT_EMPTY_TARGET;
+		}
+		if (!this.isAdvanced(origin, target)) {
+			return Error.NOT_ADVANCED;
+		}
+		int distance = origin.diagonalDistance(target);
+		if (distance > Piece.MAX_DISTANCE) {
+			return Error.BAD_DISTANCE;
+		}
+		if (distance == Piece.MAX_DISTANCE) {
+			if (pieceProvider.getPiece(origin.betweenDiagonal(target)) == null) {
+				return Error.EATING_EMPTY;
+			}
+		}
+		return null;
+	}
 
 	public boolean isEatingMovement(Coordinate origin, Coordinate target){
         return origin.diagonalDistance(target) == 2;
@@ -44,4 +57,5 @@ public class Piece {
 	public String getPieceSymbol(){
 		return letters[this.getColor().ordinal()];
 	}
+
 }
