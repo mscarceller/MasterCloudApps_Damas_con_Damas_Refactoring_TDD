@@ -1,6 +1,5 @@
 package draughts.models;
 
-import java.util.List;
 
 public class Game {
 
