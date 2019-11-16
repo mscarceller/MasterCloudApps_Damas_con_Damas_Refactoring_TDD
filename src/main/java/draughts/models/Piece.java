@@ -1,12 +1,9 @@
 package draughts.models;
 
-public class Piece {
+public abstract class Piece {
 
 	final String[] letters = {"b","n"};
-	private Color color;
-
-	private static final int MAX_DISTANCE = 2;
-
+	Color color;
 
 	Piece(Color color){
 		this.color = color;
@@ -16,46 +13,13 @@ public class Piece {
 		return this.color;
 	}
 
-	public boolean isAdvanced(Coordinate origin, Coordinate target) {
-		int difference = origin.getRow() - target.getRow();
-		if (color == Color.WHITE){
-			return difference>0;
-		}
-		return difference<0;
-	}
+	abstract Error isCorrect(Coordinate origin, Coordinate target, PieceProvider pieceProvider);
 
-	Error isCorrect(Coordinate origin, Coordinate target, PieceProvider pieceProvider) {
-		if (!origin.isDiagonal(target)) {
-			return Error.NOT_DIAGONAL;
-		}
-		if (!pieceProvider.isEmpty(target)) {
-			return Error.NOT_EMPTY_TARGET;
-		}
-		if (!this.isAdvanced(origin, target)) {
-			return Error.NOT_ADVANCED;
-		}
-		int distance = origin.diagonalDistance(target);
-		if (distance > Piece.MAX_DISTANCE) {
-			return Error.BAD_DISTANCE;
-		}
-		if (distance == Piece.MAX_DISTANCE) {
-			if (pieceProvider.getPiece(origin.betweenDiagonal(target)) == null) {
-				return Error.EATING_EMPTY;
-			}
-		}
-		return null;
-	}
+    public abstract boolean isEatingMovement(Coordinate origin, Coordinate target);
 
-	public boolean isEatingMovement(Coordinate origin, Coordinate target){
-        return origin.diagonalDistance(target) == 2;
-    }
+	public abstract Coordinate getEatedPieceCoordinate(Coordinate origin, Coordinate target);
 
-	public Coordinate getEatedPieceCoordinate(Coordinate origin, Coordinate target){
-		return origin.betweenDiagonal(target);
-	}
-
-	public String getPieceSymbol(){
-		return letters[this.getColor().ordinal()];
-	}
+	public abstract String getPieceSymbol();
+	
 
 }

@@ -21,7 +21,7 @@ public class BoardTest {
 
     @Test
     public void testGivenNewBoardWhenPutPiecesThenIsNotEmpty() {
-        Piece piece = new Piece(Color.WHITE);
+        Piece piece = new Pawn(Color.WHITE);
         Coordinate coordinate = new Coordinate(5,4);
         board.putPiece(coordinate, piece);
         assertFalse(board.getPieces(Color.WHITE).isEmpty());
@@ -29,7 +29,7 @@ public class BoardTest {
 
     @Test
     public void testGivenNewBoardWhenPutAndRemovePiecesThenIsOK() {
-        Piece piece = new Piece(Color.WHITE);
+        Piece piece = new Pawn(Color.WHITE);
         Coordinate coordinate = new Coordinate(5,4);
         board.putPiece(coordinate, piece);
         assertFalse(board.getPieces(Color.WHITE).isEmpty());

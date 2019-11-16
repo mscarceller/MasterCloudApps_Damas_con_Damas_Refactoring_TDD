@@ -63,7 +63,7 @@ public class Game {
 	}
 
 	public boolean isBlocked() {
-		return (this.areMorePieces(this.getColor()) && this.areAvailableMovements(this.getColor()));
+		return (!(this.areMorePieces(this.getColor()) && this.areAvailableMovements(this.getColor())));
 	}
 
 	public boolean areMorePieces(Color color){
