@@ -127,6 +127,8 @@ Square  --> "0..1" Piece
 
 class Piece{
 }
+Piece <|-down- Pawn
+Piece <|-down- Draught
 
 Piece *--> Color 
 
