@@ -37,17 +37,9 @@ public class Coordinate {
         return Math.abs(this.row - coordinate.row);
     }
 
-    public Coordinate betweenDiagonal(Coordinate coordinate) {
+    public Coordinate eatedDiagonal(Coordinate coordinate) {
         assert coordinate != null && coordinate.isValid();
-        assert this.isValid() && this.diagonalDistance(coordinate) == 2;
-        int rowShift = (coordinate.row - this.row < 0)? -1 : 1;
-        int columnShift = (coordinate.column - this.column < 0)? -1 : 1;
-        return new Coordinate(this.row + rowShift, this.column + columnShift);
-    }
-
-    public Coordinate lastBetweenDiagonal(Coordinate coordinate) {
-        assert coordinate != null && coordinate.isValid();
-        assert this.isValid();
+        assert this.isValid() && this.diagonalDistance(coordinate) > 1;
         int rowShift = (coordinate.row - this.row < 0)? 1 : -1;
         int columnShift = (coordinate.column - this.column < 0)? 1 : -1;
         return new Coordinate(coordinate.row + rowShift, coordinate.column + columnShift);

@@ -32,7 +32,7 @@ class Pawn extends Piece {
 			return Error.BAD_DISTANCE;
 		}
 		if (distance == Pawn.MAX_DISTANCE) {
-			if (pieceProvider.getPiece(origin.betweenDiagonal(target)) == null) {
+			if (pieceProvider.getPiece(origin.eatedDiagonal(target)) == null) {
 				return Error.EATING_EMPTY;
 			}
 		}
@@ -46,7 +46,7 @@ class Pawn extends Piece {
 
     @Override
 	public Coordinate getEatedPieceCoordinate(Coordinate origin, Coordinate target){
-		return origin.betweenDiagonal(target);
+		return origin.eatedDiagonal(target);
 	}
 
     @Override

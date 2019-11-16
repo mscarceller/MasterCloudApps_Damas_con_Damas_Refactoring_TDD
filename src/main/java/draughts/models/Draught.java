@@ -24,7 +24,7 @@ class Draught extends Piece {
 
     @Override
 	public Coordinate getEatedPieceCoordinate(Coordinate origin, Coordinate target){
-		return origin.lastBetweenDiagonal(target);
+		return origin.eatedDiagonal(target);
 	}
 
     @Override
