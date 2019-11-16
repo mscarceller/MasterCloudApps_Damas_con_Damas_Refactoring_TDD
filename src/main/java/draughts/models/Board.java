@@ -26,7 +26,7 @@ public class Board implements PieceProvider {
 		for (int i = 0; i < this.getDimension(); i++) {
 			for (int j = 0; j < this.getDimension(); j++) {
 				Coordinate coordinate = new Coordinate(i, j);
-				Piece piece = this.getInitialPiece(coordinate);
+				Pawn piece = this.getInitialPiece(coordinate);
 				if (piece != null) {
 					this.putPiece(coordinate, piece);
 				}
@@ -34,7 +34,7 @@ public class Board implements PieceProvider {
 		}
 	}
 
-	private Piece getInitialPiece(Coordinate coordinate) {
+	private Pawn getInitialPiece(Coordinate coordinate) {
 		if (coordinate.isBlack()) {
 			final int row = coordinate.getRow();
 			Color color = null;
@@ -44,7 +44,7 @@ public class Board implements PieceProvider {
 				color = Color.WHITE;
 			}
 			if (color != null) {
-				return new Piece(color);
+				return new Pawn(color);
 			}
 		}
 		return null;
