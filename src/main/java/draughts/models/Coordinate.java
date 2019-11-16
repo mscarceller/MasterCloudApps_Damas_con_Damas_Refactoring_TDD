@@ -45,6 +45,14 @@ public class Coordinate {
         return new Coordinate(this.row + rowShift, this.column + columnShift);
     }
 
+    public Coordinate lastBetweenDiagonal(Coordinate coordinate) {
+        assert coordinate != null && coordinate.isValid();
+        assert this.isValid();
+        int rowShift = (coordinate.row - this.row < 0)? 1 : -1;
+        int columnShift = (coordinate.column - this.column < 0)? 1 : -1;
+        return new Coordinate(coordinate.row + rowShift, coordinate.column + columnShift);
+    }
+
     public boolean isBlack() {
         assert this.isValid();
         return (this.row + this.column) % 2 != 0;

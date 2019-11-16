@@ -66,7 +66,13 @@ public class Board implements PieceProvider {
     }
 
     void movePiece(Coordinate origin, Coordinate target) {
-        this.putPiece(target, this.removePiece(origin));
+        Piece piece = this.removePiece(origin);
+        if (piece.getColor()==Color.WHITE && target.getRow()==0)
+            this.putPiece(target, new Draught(Color.WHITE));
+        else if (piece.getColor()==Color.BLACK && target.getRow()==(this.getDimension()-1))
+            this.putPiece(target, new Draught(Color.BLACK));
+        else
+            this.putPiece(target, piece);
     }
 
     @Override

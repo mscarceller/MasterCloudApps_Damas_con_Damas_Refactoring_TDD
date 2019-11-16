@@ -8,6 +8,7 @@ import org.junit.runners.Suite;
     BoardTest.class,
     CoordinateTest.class, 
     PieceTest.class,
+    GameWithDraughtsTest.class,
     GameTest.class, } )
 public final class AllModelTest {
 }
