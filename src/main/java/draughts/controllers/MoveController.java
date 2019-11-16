@@ -13,7 +13,14 @@ public class MoveController {
 	}
 
 	public Error move(Coordinate origin, Coordinate target) {
+		assert this.isCorrect(origin, target) == null;
 		return this.game.move(origin, target);
 	}
+
+	public Error isCorrect(Coordinate origin, Coordinate target){
+		assert origin != null;
+		assert target != null;
+		return this.game.isCorrect(origin, target);
+	}	
 
 }
