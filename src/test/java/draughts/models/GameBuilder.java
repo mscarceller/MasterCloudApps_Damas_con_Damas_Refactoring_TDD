@@ -2,7 +2,9 @@
 package draughts.models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GameBuilder{
 
@@ -35,10 +37,12 @@ public class GameBuilder{
     }
     
     private void putPiece(char charPiece, int row, int col){
-        Color color =  Color.WHITE;
-        if (charPiece=='n') 
-            color = Color.BLACK;
-        this.board.putPiece(new Coordinate(row,col), new Piece(color));
+        Map<Character, Piece> pieces = new HashMap<Character, Piece>(); 
+        pieces.put('b', new Pawn(Color.WHITE));
+        pieces.put('n', new Pawn(Color.BLACK));
+        pieces.put('B', new Draught(Color.WHITE));
+        pieces.put('N', new Draught(Color.BLACK));
+        this.board.putPiece(new Coordinate(row,col), pieces.get(charPiece));
     }
 
 }
