@@ -1,6 +1,7 @@
 package draughts.models;
 
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -118,6 +119,43 @@ public class GameTest {
     @Test
     public void testGivenGameWhenMoveBadDistanceThenError() {
         assertEquals(Error.BAD_DISTANCE, game.isCorrect(new Coordinate(3,1), new Coordinate(0,4)));
+    }
+
+
+    @Test
+    public void testGivenGameWhenBlockedBecauseNoMorePiecesThenGameOver() {
+        Game game = new GameBuilder()
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row(" b      ")
+            .row("        ")
+            .row("  b   b ")
+            .row(" b      ")
+            .row("        ")
+            .build();
+        Coordinate originWhite = new Coordinate(5, 2);
+        Coordinate targetWhite = new Coordinate(4, 1);
+        game.move(originWhite, targetWhite);
+        assertTrue(game.isBlocked());
+    }
+
+    @Test
+    public void testGivenGameWhenBlockedBecauseNoMoreMovablePiecesThenGameOver() {
+        Game game = new GameBuilder()
+            .row("       n")
+            .row("      b ")
+            .row("        ")
+            .row("    b   ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .build();
+        Coordinate originWhite = new Coordinate(3, 4);
+        Coordinate targetWhite = new Coordinate(2, 5);
+        game.move(originWhite, targetWhite);
+        assertTrue(game.isBlocked());
     }
 
 }
