@@ -1,83 +1,61 @@
 package draughts.models;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import org.junit.Before;
-
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 public class GameWithDraughtsTest {
 
-    @Mock
-    Turn turn;
+    private Game game;
 
-    @Mock
-    Piece piece;
-    
-    @Mock
-    Board board;
+    public GameWithDraughtsTest() {
+        game = new GameBuilder()
+            .row(" n    B ")
+            .row("  b  n  ")
+            .row(" N  b   ")
+            .row(" b   n  ")
+            .row("   n    ")
+            .row("n b   b ")
+            .row(" b   n  ")
+            .row("        ")
+            .build();
+    }
 
-    @InjectMocks
-    Game game;
 
-    @Before
-    public void before(){
-        MockitoAnnotations.initMocks(this);
+    @Test
+    public void testGivenGameWhenWhiteDraughMoveBackThenOK(){
+        assertNull(game.isCorrect(new Coordinate(0,6), new Coordinate(1,7)));
+    }
+
+    @Test
+    public void testGivenGameWhenBlackDraughMoveBackThenOK(){
+        assertNull(game.isCorrect(new Coordinate(2,1), new Coordinate(0,3)));
     }
 
     @Test
     public void testGivenGameWhenWhitePawnAtLimitThenNewDraugts(){
-        Coordinate origin = new Coordinate(1,0);
-        Coordinate target = new Coordinate(0,1);
-        
-        when (turn.getColor()).thenReturn(Color.WHITE);
-        when(board.isEmpty(origin)).thenReturn(false);
-        when(board.getColor(origin)).thenReturn(Color.WHITE);
-        when(board.getPiece(origin)).thenReturn(piece);
-        when(piece.isCorrect(origin, target, board)).thenReturn(null);
-        when(board.removePiece(origin)).thenReturn(new Piece(Color.WHITE));
-        
-        when(board.getPiece(target)).thenReturn(new Piece(Color.WHITE));
-        game.move(origin, target);
-        verify(board).removePiece(target);
-        verify(board).putPiece(any(Coordinate.class), any(Draught.class));
-    }
-
-    @Test
-    public void testGivenGameWhenPawnAtLimitAndEatingThenNewDraugts(){
-        Coordinate origin = new Coordinate(2,1);
-        Coordinate target = new Coordinate(0,3);
-        when (turn.getColor()).thenReturn(Color.WHITE);
-        when(board.isEmpty(origin)).thenReturn(false);
-        when(board.getColor(origin)).thenReturn(Color.WHITE);
-        when(board.getPiece(origin)).thenReturn(piece);
-        when(piece.isCorrect(origin, target, board)).thenReturn(null);
-        when(board.removePiece(origin)).thenReturn(new Piece(Color.WHITE));
-        when(board.getPiece(target)).thenReturn(new Piece(Color.WHITE));
-        game.move(origin, target);
-        verify(board).removePiece(origin.betweenDiagonal(target));
-        verify(board).removePiece(target);
-        verify(board).putPiece(any(Coordinate.class), any(Draught.class));
+        game.move(new Coordinate(1,2), new Coordinate(0,3));
+        assertTrue(game.getPiece(new Coordinate(0,3)) instanceof Draught);
     }
 
     @Test
     public void testGivenGameWhenBlackPawnAtLimitThenNewDraugts(){
-        Coordinate origin = new Coordinate(6,3);
-        Coordinate target = new Coordinate(7,2);
-        when (turn.getColor()).thenReturn(Color.BLACK);
-        when(board.isEmpty(origin)).thenReturn(false);
-        when(board.getColor(origin)).thenReturn(Color.BLACK);
-        when(board.getPiece(origin)).thenReturn(piece);
-        when(piece.isCorrect(origin, target, board)).thenReturn(null);
-        when(board.removePiece(origin)).thenReturn(new Piece(Color.BLACK));
-        when(board.getPiece(target)).thenReturn(new Piece(Color.BLACK));
-        game.move(origin, target);
-        verify(board).removePiece(target);
-        verify(board).putPiece(any(Coordinate.class), any(Draught.class));
+        game.move(new Coordinate(1,2), new Coordinate(0,3));
+        game.move(new Coordinate(6,5), new Coordinate(7,4));
+        assertTrue(game.getPiece(new Coordinate(7,4)) instanceof Draught);
     }
+
+    @Test
+    public void testGivenGameWhenWhitePawnAtLimitAndEatingThenNewDraugts(){
+        game.move(new Coordinate(2,4), new Coordinate(0,6));
+        assertTrue(game.getPiece(new Coordinate(0,6)) instanceof Draught);
+    }
+
+    @Test
+    public void testGivenGameWhenBlackPawnAtLimitAndEatingThenNewDraugts(){
+        game.move(new Coordinate(1,2), new Coordinate(0,3));
+        game.move(new Coordinate(5,0), new Coordinate(7,2));
+        assertTrue(game.getPiece(new Coordinate(7,2)) instanceof Draught);
+    }
+    
 }
