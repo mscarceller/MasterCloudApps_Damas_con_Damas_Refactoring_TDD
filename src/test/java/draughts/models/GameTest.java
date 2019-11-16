@@ -13,6 +13,30 @@ public class GameTest {
     }
 
     @Test
+    public void testGivenGameBuilderWhenGetPieceThenIsOK(){
+        Game game = new GameBuilder()
+            .row(" n      ")
+            .row("        ")
+            .row("        ")
+            .row("     n  ")
+            .row("        ")
+            .row("      b ")
+            .row(" b      ")
+            .row("        ")
+            .build();
+        assertEquals(Color.BLACK, game.getColor(new Coordinate(0,1)));
+        assertEquals(Color.BLACK, game.getColor(new Coordinate(3,5)));
+        assertEquals(Color.WHITE, game.getColor(new Coordinate(5,6)));
+        assertEquals(Color.WHITE, game.getColor(new Coordinate(6,1)));
+        assertEquals(null, game.getColor(new Coordinate(0,0)));
+        Coordinate origin = new Coordinate(6,1);
+        Coordinate target = new Coordinate(5,2);
+        game.move(origin, target);
+        assertEquals(null, game.getColor(origin));
+        assertEquals(Color.WHITE, game.getColor(target));
+    }
+
+    @Test
     public void testGivenNewBoardThenGoodLocations() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < game.getDimension(); j++) {
