@@ -1,6 +1,5 @@
 package draughts.models;
 
-
 public class Game {
 
 	private Board board;
@@ -71,7 +70,27 @@ public class Game {
 	}
 
 	public boolean areAvailableMovements(Color color){
-		return true;
+		for (int i = 0; i < this.board.getDimension(); i++) {
+			for (int j = 0; j < this.getDimension(); j++) {
+				Coordinate origin = new Coordinate(i, j);
+				Piece piece = this.getPiece(origin);
+				if (piece != null) {
+					if (this.isMovable(origin))
+						return true;
+				}
+			}
+		}
+        return false;
+	}
+
+	private boolean isMovable(Coordinate origin){
+		for (int i = 0; i < this.board.getDimension(); i++) {
+			for (int j = 0; j < this.getDimension(); j++) {
+				if (isCorrect(origin,new Coordinate(i,j))==null)
+					return true;
+			}
+		}
+		return false;
 	}
 
 	public int getDimension() {
