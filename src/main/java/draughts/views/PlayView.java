@@ -37,6 +37,7 @@ public class PlayView extends WithConsoleView {
 
     private void checkIfGameOver(PlayController playController){
         if (playController.isBlocked()){
+            new BoardView().writeBoard(playController.getBoard());
             MessageView.LOOSER.writeln();
             playController.gameOver();
         }
