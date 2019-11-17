@@ -9,7 +9,7 @@ public class BoardView extends WithConsoleView {
     public BoardView(){
     }
 
-    public void writeBoard(Board board){
+    void writeBoard(Board board){
         final int DIMENSION = board.getDimension();
         console.writeln();
         this.writeNumbersLine(DIMENSION);

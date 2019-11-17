@@ -62,14 +62,14 @@ public class Game {
 	}
 
 	public boolean isBlocked() {
-		return (!(this.areMorePieces(this.getColor()) && this.areAvailableMovements(this.getColor())));
+		return (!(this.areMorePieces(this.getColor()) && this.areAvailableMovements()));
 	}
 
-	public boolean areMorePieces(Color color){
+	private boolean areMorePieces(Color color){
 		return (!this.board.getPieces(color).isEmpty());
 	}
 
-	public boolean areAvailableMovements(Color color){
+	private boolean areAvailableMovements(){
 		for (int i = 0; i < this.board.getDimension(); i++) {
 			for (int j = 0; j < this.getDimension(); j++) {
 				Coordinate origin = new Coordinate(i, j);
