@@ -19,7 +19,6 @@ public class PlayView extends WithConsoleView {
         Error error = null;
         String color = PlayView.COLORS[playController.getColor().ordinal()];
         new BoardView().writeBoard(playController.getBoard());
-        this.checkIfGameOver(playController);
         do {
             String command = readValidCommand(color);
             if (command.equals(GIVEUP_COMMAND)){
@@ -32,7 +31,8 @@ public class PlayView extends WithConsoleView {
             if (error != null){
                 new ErrorView(error).writeln();
             }
-        } while (error != null);   
+        } while (error != null);  
+        this.checkIfGameOver(playController); 
     }
 
     private void checkIfGameOver(PlayController playController){
