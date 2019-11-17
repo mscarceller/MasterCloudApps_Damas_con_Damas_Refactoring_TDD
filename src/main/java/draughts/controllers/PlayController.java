@@ -19,8 +19,12 @@ public class PlayController extends Controller {
 		this.moveController = new MoveController(game);
 	}
 
-	public Error move(Coordinate origin, Coordinate target){
-		return this.moveController.move(origin, target);
+	public void move(Coordinate origin, Coordinate target){
+		this.moveController.move(origin, target);
+	}
+
+	public Error isCorrect(Coordinate origin, Coordinate target){
+		return this.moveController.isCorrect(origin, target);
 	}
 
 	public void cancelGame(){
