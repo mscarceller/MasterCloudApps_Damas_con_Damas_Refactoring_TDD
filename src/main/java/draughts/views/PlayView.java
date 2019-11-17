@@ -23,7 +23,8 @@ public class PlayView extends WithConsoleView {
         do {
             String command = readValidCommand(color);
             if (command.equals(GIVEUP_COMMAND)){
-                this.cancelGame(playController);
+                error = null;
+                playController.cancelGame();
             }
             else{
                 error = this.tryToMove(playController, command);
@@ -31,7 +32,7 @@ public class PlayView extends WithConsoleView {
             if (error != null){
                 new ErrorView(error).writeln();
             }
-        } while (error != null);
+        } while (error != null);   
     }
 
     private void checkIfGameOver(PlayController playController){
@@ -55,19 +56,19 @@ public class PlayView extends WithConsoleView {
         return command;
     }
 
-    private void cancelGame(PlayController playController){
-        playController.cancelGame();
-    }
-
     private Error tryToMove(PlayController playController, String command){
         Coordinate origin = new Coordinate(command.substring(0, 2));
         Coordinate target = new Coordinate(command.substring(3, 5));
+        Error error;
         if (!origin.isValid() || !target.isValid()) {
             return Error.OUT_COORDINATE;
         }
         else{
-            return playController.move(origin,target);
+            error = playController.isCorrect(origin,target);
         }
+        if (error == null){
+            playController.move(origin, target); 
+        }
+        return error;  
     }
-
 }

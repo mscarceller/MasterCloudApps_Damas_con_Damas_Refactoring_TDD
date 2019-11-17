@@ -1,4 +1,3 @@
-
 package draughts.models;
 
 import java.util.ArrayList;
