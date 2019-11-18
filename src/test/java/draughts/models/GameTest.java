@@ -93,6 +93,7 @@ public class GameTest {
         Coordinate originWhite = new Coordinate(5, 2);
         Coordinate targetWhite = new Coordinate(4, 1);
         this.game.move(originWhite, targetWhite);
+        game.nextTurn();
         assertNull(this.game.getColor(originWhite));
         assertEquals(Color.WHITE, this.game.getColor(targetWhite));
         Coordinate originBlack = new Coordinate(0, 1);
@@ -137,6 +138,7 @@ public class GameTest {
         Coordinate originWhite = new Coordinate(5, 2);
         Coordinate targetWhite = new Coordinate(4, 1);
         game.move(originWhite, targetWhite);
+        game.nextTurn();
         assertTrue(game.isBlocked());
     }
 
@@ -155,6 +157,7 @@ public class GameTest {
         Coordinate originWhite = new Coordinate(3, 4);
         Coordinate targetWhite = new Coordinate(2, 5);
         game.move(originWhite, targetWhite);
+        game.nextTurn();
         assertTrue(game.isBlocked());
     }
 
