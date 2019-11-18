@@ -14,7 +14,8 @@ public class ErrorView{
         "No respetas la distancia",
         "No está vacío el destino",
         "No avanzas",
-        "No comes contrarias"
+		"No comes contrarias",
+		"No se puede comer tantas en un movimiento"
     };
 
 	Error error;

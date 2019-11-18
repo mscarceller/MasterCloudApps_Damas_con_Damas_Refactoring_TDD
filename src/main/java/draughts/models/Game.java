@@ -1,5 +1,7 @@
 package draughts.models;
 
+import java.util.Map;
+
 public class Game {
 
 	private Board board;
@@ -29,8 +31,11 @@ public class Game {
 			this.board.removePiece(piece.getEatedPieceCoordinate(origin, target));
 		}
 		this.board.movePiece(origin, target);
-		this.turn.change();
 		return null;
+	}
+
+	public void nextTurn(){
+		this.turn.change();
 	}
 
 	public Error isCorrect(Coordinate origin, Coordinate target){

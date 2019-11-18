@@ -1,5 +1,7 @@
 package draughts.controllers;
 
+import java.util.Map;
+
 import draughts.models.Coordinate;
 import draughts.models.Game;
 import draughts.models.Error;
@@ -12,9 +14,9 @@ public class MoveController {
 		this.game = game;
 	}
 
-	public void move(Coordinate origin, Coordinate target) {
+	public Error move(Coordinate origin, Coordinate target) {
 		assert this.isCorrect(origin, target) == null;
-		this.game.move(origin, target);
+		return this.game.move(origin, target);
 	}
 
 	public Error isCorrect(Coordinate origin, Coordinate target){
@@ -22,5 +24,4 @@ public class MoveController {
 		assert target != null;
 		return this.game.isCorrect(origin, target);
 	}	
-
 }

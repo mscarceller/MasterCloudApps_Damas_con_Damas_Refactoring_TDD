@@ -1,5 +1,7 @@
 package draughts.controllers;
 
+import java.util.Map;
+
 import draughts.models.Board;
 import draughts.models.Color;
 import draughts.models.Coordinate;
@@ -17,6 +19,10 @@ public class PlayController extends Controller {
 		super(game, state);
 		this.cancelController = new CancelController(state);
 		this.moveController = new MoveController(game);
+	}
+
+	public void nextTurn(){
+		this.game.nextTurn();
 	}
 
 	public void move(Coordinate origin, Coordinate target){
