@@ -1,7 +1,5 @@
 package draughts.controllers;
 
-import java.util.Map;
-
 import draughts.models.Board;
 import draughts.models.Color;
 import draughts.models.Coordinate;

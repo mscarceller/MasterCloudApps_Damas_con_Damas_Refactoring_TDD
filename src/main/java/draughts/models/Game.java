@@ -1,7 +1,5 @@
 package draughts.models;
 
-import java.util.Map;
-
 public class Game {
 
 	private Board board;

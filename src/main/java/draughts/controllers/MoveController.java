@@ -1,7 +1,5 @@
 package draughts.controllers;
 
-import java.util.Map;
-
 import draughts.models.Coordinate;
 import draughts.models.Game;
 import draughts.models.Error;

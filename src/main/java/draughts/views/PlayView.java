@@ -1,8 +1,5 @@
 package draughts.views;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import draughts.controllers.PlayController;
 import draughts.models.Error;
 import draughts.models.Coordinate;
@@ -73,13 +70,11 @@ public class PlayView extends WithConsoleView {
     private boolean multipleMovements(PlayController playController, String[] commands ){
         boolean moved = false;
         for (String command : commands){
-            Coordinate origin = new Coordinate(command.substring(0, 2));
-            Coordinate target = new Coordinate(command.substring(3, 5));
-            if (!origin.isValid() || !target.isValid()) {
+            if (!areValidCommandCoordinates(command)) {
                 new ErrorView(Error.OUT_COORDINATE).writeln();
                 return false;
             }
-            if (origin.diagonalDistance(target)<2){
+            if (this.getOriginFromCommand(command).diagonalDistance(this.getTargetFromCommand(command))<2){
                 new ErrorView(Error.BAD_DISTANCE).writeln();
                 return false;
             }
@@ -91,21 +86,31 @@ public class PlayView extends WithConsoleView {
 
 
     private boolean singleMovement(PlayController playController, String command){
-        Coordinate origin = new Coordinate(command.substring(0, 2));
-        Coordinate target = new Coordinate(command.substring(3, 5));
         Error error;
-        if (!origin.isValid() || !target.isValid()) {
+        if (!areValidCommandCoordinates(command)) {
             new ErrorView(Error.OUT_COORDINATE).writeln();
             return false;
         }
         else{
-            error = playController.isCorrect(origin,target);
+            error = playController.isCorrect(this.getOriginFromCommand(command),this.getTargetFromCommand(command));
         }
         if (error != null){
             new ErrorView(error).writeln();
             return false;
         }
-        playController.move(origin, target); 
+        playController.move(this.getOriginFromCommand(command), this.getTargetFromCommand(command)); 
         return true; 
+    }
+
+    private boolean areValidCommandCoordinates(String command){
+        return (this.getOriginFromCommand(command).isValid() && this.getTargetFromCommand(command).isValid());
+    }
+
+    private Coordinate getOriginFromCommand(String command){
+        return new Coordinate(command.substring(0, 2));
+    }
+
+    private Coordinate getTargetFromCommand(String command){
+        return new Coordinate(command.substring(3, 5));
     }
 }
